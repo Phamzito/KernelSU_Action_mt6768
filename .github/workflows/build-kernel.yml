@@ -39,7 +39,7 @@ jobs:
     - name: Download Clang Toolchain
       run: |
         mkdir clang
-        git clone https://github.com/kdrag0n/proton-clang.git -b master --depth=1 clang
+        git clone https://github.com/rama982/clang.git -b master --depth=1 clang
     - name: Download mkbootimg tools
       if: env.MAKE_BOOT_IMAGE == 'true'
       run: |
@@ -57,7 +57,7 @@ jobs:
     - name: Kernel patch
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        git clone https://github.com/Arafattex/KernelSU_Action_mt6768 -b Lancelot-13.0 pt
+        git clone https://github.com/Shas45558/KernelSU_Action_mt6768 -b Lancelot-13.0 pt
         cd android-kernel
         git apply $GITHUB_WORKSPACE/kernel_workspace/pt/KernelSU.patch
         
