@@ -39,7 +39,7 @@ jobs:
     - name: Download Clang Toolchain
       run: |
         mkdir clang
-        git clone https://github.com/kdrag0n/proton-clang.git -b master --depth=1 clang
+        git clone https://github.com/rama982/clang -b master --depth=1 clang
     - name: Download mkbootimg tools
       if: env.MAKE_BOOT_IMAGE == 'true'
       run: |
@@ -113,7 +113,7 @@ jobs:
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
         make -j$(nproc --all) O=out ARCH=arm64 savedefconfig
         cp -f out/defconfig arch/${{ env.TARGET_ARCH }}/configs/${{ env.KERNEL_DEFCONFIG }}
-        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} CC=clang CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi-
+        make -j$(nproc --all) O=out ARCH=${{ env.TARGET_ARCH }} CC=clang CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- LD=ld.lld NM=llvm-nm OBJCOPY=llvm-objcopy
 
     - name: Check a kernel output files
       run: |
